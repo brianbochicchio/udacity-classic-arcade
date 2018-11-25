@@ -1,9 +1,18 @@
 # Classic Arcade Game Clone Project
+Udacity Student Project
+
 
 ## Table of Contents
 
 - [Instructions](#instructions)
 - [Contributing](#contributing)
+- [How To Play](#how-to-play)
+
+
+- [Project Info](#project-info) 
+    - [Enemies](#enemies)
+    - [Player](#player)
+    
 
 ## Instructions
 
@@ -18,3 +27,23 @@ For detailed instructions on how to get started, check out this [guide](https://
 ## Contributing
 
 This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+
+## How to Play
+
+Move your player from the grass to the water with the arrow keys on your keyboard. Avoid bumping into the bugs. 
+
+[Start the Game](index.html) 
+
+Good Luck!
+
+
+
+## Project Info
+
+## Enemies
+
+
+## Player
+
+
+
