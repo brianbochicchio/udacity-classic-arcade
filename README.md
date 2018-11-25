@@ -32,7 +32,7 @@ This repository is the starter code for _all_ Udacity students. Therefore, we mo
 
 Move your player from the grass to the water with the arrow keys on your keyboard. Avoid bumping into the bugs. 
 
-[Start the Game](index.html) 
+[Start the Game](https://brianbochicchio.github.io/udacity-classic-arcade/) 
 
 Good Luck!
 
