@@ -48,8 +48,9 @@ Enemy.prototype.initEnemy = function () {
     **
  */
 const Player = function () {
-
-    this.sprite = 'images/enemy-bug.png';
+    this.x = 200;
+    this.y = 400;
+    this.sprite = 'images/char-boy.png';
 };
 
 Player.prototype.update = function () {
@@ -60,8 +61,30 @@ Player.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-Player.prototype.handleInput = function () {
-    console.log("got an input");
+Player.prototype.handleInput = function (keyCode) {
+    switch (keyCode) {
+        case 'up':
+            if(!(this.y <= 0))
+            this.y -= 20;
+            break;
+        case 'down':
+            if (!(this.y >= 440))
+            this.y += 20;
+            break;
+        case 'left':
+            if(!(this.x <= 0))
+            this.x -= 20;
+            break;
+        case 'right':
+            if(!(this.x >= 410))
+            this.x += 20;
+            break;
+        default:
+        // do nothing
+    }
+
+
+
 };
 
 
