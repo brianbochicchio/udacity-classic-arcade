@@ -9,9 +9,7 @@ Udacity Student Project
 - [How To Play](#how-to-play)
 
 
-- [Project Info](#project-info) 
-    - [Enemies](#enemies)
-    - [Player](#player)
+- [Project Notes](PROJECT_NOTES.md) 
     
 
 ## Instructions
@@ -35,15 +33,3 @@ Move your player from the grass to the water with the arrow keys on your keyboar
 [Start the Game](https://brianbochicchio.github.io/udacity-classic-arcade/) 
 
 Good Luck!
-
-
-
-## Project Info
-
-## Enemies
-
-
-## Player
-
-
-
