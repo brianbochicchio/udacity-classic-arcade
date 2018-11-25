@@ -21,14 +21,34 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+// Player class and functions
+const Player = function() {
+
+    this.sprite = 'images/enemy-bug.png';
+};
+
+Player.prototype.update = function(dt) {
+    // You should multiply any movement by the dt parameter
+    // which will ensure the game runs at the same speed for
+    // all computers.
+};
+Player.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+Player.prototype.handleInput = function() {
+    console.log("got an input");
+};
+
 
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
+const bug1 = new Enemy();
+const allEnemies = [bug1];
+
 // Place the player object in a variable called player
+const player = new Player();
 
 
 
