@@ -8,7 +8,7 @@ const Enemy = function () {
     this.initEnemy();
     this.sprite = 'images/enemy-bug.png';
     this.width = 101;
-    this.height  = 80;
+    this.height = 80;
 
 };
 
@@ -30,6 +30,13 @@ Enemy.prototype.update = function (dt) {
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+
+    //TODO:  this is in the wrong place also want a black Stroke like a meme
+    ctx.font = "36pt impact";
+    ctx.lineWidth  ="3pt";
+    ctx.strokeStyle = "black";
+    ctx.fillStyle = "white";
+    ctx.fillText(player.score, 400, 550);
 };
 
 Enemy.prototype.initEnemy = function () {
@@ -37,9 +44,6 @@ Enemy.prototype.initEnemy = function () {
     this.y = Math.floor(Math.random() * 180) + 60;
     this.speed = Math.floor(Math.random() * 300) + 50;
     // TODO: tune speed some enemies are too fast
-    //console.log(`x:${this.x}, y:${this.y}, speed: ${this.speed}`);
-    return;
-
 }
 
 
@@ -53,18 +57,24 @@ const Player = function () {
     this.y = 400;
     this.sprite = 'images/char-boy.png';
     this.width = 70;
-    this.height  = 80;
+    this.height = 80;
+    this.score = 0;
+    this.lives = 3;
 };
 
 Player.prototype.update = function () {
 
-    if (player.y === 0){
+    //TODO: When the player reaches y of zero this is win
+    // need to create a scoring system to track this
+    if (player.y === 0) {
+        player.score += 100;
         player.resetPlayer();
+        console.log(player.score);
     }
 
 };
 
-Player.prototype.resetPlayer = function(){
+Player.prototype.resetPlayer = function () {
     player.x = 200;
     player.y = 400;
 }
@@ -73,6 +83,7 @@ Player.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+// Moves player upon a valid key input and also prevents them from going off canvas
 Player.prototype.handleInput = function (keyCode) {
     switch (keyCode) {
         case 'up':
@@ -111,10 +122,8 @@ for (let i = 0; i < numberOfEnemies; i++) {
     allEnemies.push(new Enemy());
 }
 
-
 // Place the player object in a variable called player
 const player = new Player();
-
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
@@ -129,26 +138,16 @@ document.addEventListener('keyup', function (e) {
     player.handleInput(allowedKeys[e.keyCode]);
 });
 
-function checkCollisions(){
+//Invoked by engine.js update function
+function checkCollisions() {
     // Based on 2D Basic Collision Example from
     // http://blog.sklambert.com/html5-canvas-game-2d-collision-detection#d-collision-detection
     // by Steven Lambert January 13, 2013
 
-    let whichEnemy = 0;
-    for (const enemy of allEnemies){
-        whichEnemy++;
-        if (player.x < enemy.x + enemy.width  && player.x + player.width  > enemy.x &&
+    for (const enemy of allEnemies) {
+        if (player.x < enemy.x + enemy.width && player.x + player.width > enemy.x &&
             player.y < enemy.y + enemy.height && player.y + player.height > enemy.y) {
             player.resetPlayer();
-            console.log(`Collided with Enemy ${whichEnemy}`);
         }
-
-
-
     }
-
-
-
-
-
 }
