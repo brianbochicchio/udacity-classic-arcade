@@ -80,6 +80,7 @@ var Engine = (function(global) {
     function update(dt) {
         updateEntities(dt);
         checkCollisions();
+        game.updateGameStatus();
     }
 
     /* This is called by the update function and loops through all of the
@@ -154,6 +155,7 @@ var Engine = (function(global) {
         });
 
         player.render();
+        game.render();
     }
 
     /* This function does nothing but it could have been a good place to
@@ -173,6 +175,9 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
+        'images/enemy-bug-2.png',
+        'images/enemy-bug-3.png',
+        'images/enemy-bug-4.png',
         'images/char-boy.png'
     ]);
     Resources.onReady(init);
