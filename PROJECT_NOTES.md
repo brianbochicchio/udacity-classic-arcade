@@ -27,12 +27,12 @@ Note that the Rubric uses Vehicle to refer to enemies. The provided project sour
 - [X] Player causes a bonus item to appear when reaching the water tile
 - [X] Player handles keyboard input for character movement and game reset
 
-## Bonus Items
+### Bonus Items
 - [X] Item type, speed, drift and crossing location is randomized
 - [X] Heart Item/Player collision increases player score by 200 points
 - [X] Green Gem Item/Player collision increases player lives by 1
 
-## Game
+### Game
 - [X] Game tracks the lives, score and high score
 - [X] Game keeps high score until the browser is refreshed or closed
 - [X] Game tracks the GameOver state 
