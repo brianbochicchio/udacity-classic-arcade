@@ -4,13 +4,21 @@ Udacity Student Project
 
 ## Table of Contents
 
-- [Instructions](#instructions)
-- [Contributing](#contributing)
 - [How To Play](#how-to-play)
-
-
 - [Project Notes](PROJECT_NOTES.md) 
+- [Project Instructions](#instructions)
+- [Contributing](#contributing)
     
+## How to Play
+
+Use the arrow keys (&#8679; &#8681; &#8678; &#8680;) to navigate your player from the grass to the water. Each time the player reaches the water their  score increases by 100 points. This also triggers a random bonus item to appear.  The heart grants an extra life. The green gem grants a 200 point bonus. The game also tracks the high score until the game browser is refreshed or closed. 
+
+My best score in testing is 5700. Can quickly can you beat it?! Good luck!  
+
+#### &#9758; [Start the Game](https://brianbochicchio.github.io/udacity-classic-arcade/) 
+
+
+
 
 ## Instructions
 
@@ -24,14 +32,5 @@ For detailed instructions on how to get started, check out this [guide](https://
 
 ## Contributing
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+This repository is based on starter code for _all_ Udacity students. Therefore, I most likely will not accept pull requests.
 
-## How to Play
-
-Use the arrow keys to navigate your player from the grass to the water. Each time you reach the water you will score 100 points. You will also trigger a random bonus item to appear.  The heart grants an extra life. The green gem grants a 200 point bonus. 
-
-The game also tracks your high score until you fresh the game browser.  My best score in testing is 5700.  Can quickly can you beat it?!  
-
-[Start the Game](https://brianbochicchio.github.io/udacity-classic-arcade/) 
-
-Good Luck!
