@@ -28,7 +28,9 @@ This repository is the starter code for _all_ Udacity students. Therefore, we mo
 
 ## How to Play
 
-Move your player from the grass to the water with the arrow keys on your keyboard. Avoid bumping into the bugs. 
+Use the arrow keys to navigate your player from the grass to the water. Each time you reach the water you will score 100 points. You will also trigger a random bonus item to appear.  The heart grants an extra life. The green gem grants a 200 point bonus. 
+
+The game also tracks your high score until you fresh the game browser.  My best score in testing is 5700.  Can quickly can you beat it?!  
 
 [Start the Game](https://brianbochicchio.github.io/udacity-classic-arcade/) 
 

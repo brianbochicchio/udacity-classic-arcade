@@ -22,7 +22,6 @@ const Enemy = function () {
 // Movements are multiplied by the dt parameter to
 // ensure the consistent speed on all devices
 Enemy.prototype.update = function (dt) {
-
     // If the enemy is visible and the game is not over, the enemy advances
     // Otherwise the enemy is re-initialized
     if (!(this.x > (ctx.canvas.width + 30)) && (!game.gameOver)) {
@@ -35,6 +34,13 @@ Enemy.prototype.update = function (dt) {
 
 // Sets the enemy's location, speed and color
 Enemy.prototype.initEnemy = function () {
+    // Array of available sprites
+    const enemyVariants = [
+        'images/enemy-bug.png',
+        'images/enemy-bug-2.png',
+        'images/enemy-bug-3.png',
+        'images/enemy-bug-4.png'];
+
     this.x = -105;
     this.y = Math.floor(Math.random() * 180) + 60;
     this.speed = Math.floor(Math.random() * 300) + 50;
@@ -67,6 +73,7 @@ const Player = function () {
 // Moves player upon a valid key input and also prevents them from going off canvas
 // If the game is over, it prevents any player movement and handles the called to
 // restart the game.
+//TODO: Handling the restart here seems wrong
 Player.prototype.handleInput = function (keyCode) {
     if (!game.gameOver) {
         switch (keyCode) {
@@ -97,26 +104,97 @@ Player.prototype.handleInput = function (keyCode) {
 
 };
 
-Player.prototype.update = function () {
+// Helper function that puts the player back at the starting location
+Player.prototype.resetPlayerLocation = function () {
+    player.x = 200;
+    player.y = 400;
+}
 
-    // If the player reaches the water add 100 to the score and reset their location
+Player.prototype.update = function () {
+    // Checks the player location to see if they have crossed safely
+    // and increments the player score if they have
+    // Also generates a bonus item
     if (player.y === 0) {
         player.score += 100;
-        player.resetPlayer();
+        player.resetPlayerLocation();
+        bonusItem.visible ? '' : bonusItem.show();
 
     }
 
 };
 
-Player.prototype.resetPlayer = function () {
-    player.x = 200;
-    player.y = 400;
-}
-
+// Draw the player on the screen, required method for game
 Player.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+/*
+    **
+    **  Bonus object definition and functions
+    **
+ */
+const BonusItem = function () {
+    // Sets default properties for the player
+    this.x = -105;
+    this.y = Math.floor(Math.random() * 200) + 80;
+    this.sprite = 'images/Gem Green.png';
+    this.speed = 0;
+    this.width = 70;
+    this.height = 80;
+    this.drift = 0;
+    this.visible = false;
+
+};
+
+BonusItem.prototype.update = function (dt) {
+    if ((!game.gameOver)) {
+        // If the bonus item is visible and the game is not over, the item advances
+        // Otherwise the item is hidden off screen
+        if (!(this.x > (ctx.canvas.width + 30)) && (!game.gameOver)) {
+            this.x += this.speed * dt;
+            this.y += this.drift;
+        } else {
+            this.hide();
+        }
+    } else {
+        this.hide();
+    }
+
+};
+
+// Helper function that puts the player back at the starting location
+BonusItem.prototype.hide = function () {
+    this.x = -105;
+    this.y = 0;
+    this.speed = 0;
+    this.visible = false;
+}
+
+// Helper function that puts the player back at the starting location
+BonusItem.prototype.show = function () {
+    const bonusItemVariants = [
+        'images/Heart.png',
+        'images/Gem Green.png'];
+
+    this.x = -105;
+    this.y = Math.floor(Math.random() * 300) + 20;
+    this.speed = Math.floor(Math.random() * 100) + 50;
+    this.sprite = bonusItemVariants[Math.floor(Math.random() * 2)];
+    console.log("CURRENT Y: " + this.y + "Drift: " + this.drift);
+    if (this.y >= 50 && this.y <= 200) {
+        this.drift = .3;
+    } else {
+        this.drift = -.3;
+    }
+
+    this.visible = true;
+
+}
+
+// Draw the bonus item on the screen, required method for game
+BonusItem.prototype.render = function () {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
 
 /*
     **
@@ -125,12 +203,13 @@ Player.prototype.render = function () {
  */
 const Game = function () {
 
-    // Game state properties
+    // Game default state properties
     this.gameOver = false;
     this.gamePlayerLives = "Lives: 0";
     this.gamePlayerScore = "Score: 0";
     this.gameHighScore = 0;
     this.gameHighScoreText = "High Score: 0";
+    this.isNewHighScore = false;
 
     // Frequently referenced game properties
     this.cXCenter = 252.5;
@@ -139,14 +218,17 @@ const Game = function () {
 
 };
 
-// Get player properties before
+// Check the player properties before rendering the lives, score and high score
 Game.prototype.updateGameStatus = function () {
-    game.gamePlayerLives = "Lives: " + player.lives;
-    game.gamePlayerScore = "Score: " + player.score;
+    this.gamePlayerLives = "Lives: " + player.lives;
+    this.gamePlayerScore = "Score: " + player.score;
 
-    if (game.gameHighScore < player.score) {
-        game.gameHighScore = player.score;
-        game.gameHighScoreText = "High Score: " + game.gameHighScore;
+    // If the player beats the current high score while playing update it now
+    // to provide extra motivation
+    if (this.gameHighScore < player.score) {
+        this.gameHighScore = player.score;
+        this.gameHighScoreText = "High Score: " + game.gameHighScore;
+        this.isNewHighScore = true;
     }
 
 
@@ -181,52 +263,51 @@ Game.prototype.render = function () {
         ctx.font = "36pt impact";
         ctx.fillText(game.gamePlayerScore, game.cXCenter, game.finalScoreYOffset);
         ctx.strokeText(game.gamePlayerScore, game.cXCenter, game.finalScoreYOffset);
-        player.resetPlayer();
+        player.resetPlayerLocation();
         ctx.font = "24pt sans-serif";
         ctx.fillText("Press (y) to play again", game.cXCenter, game.finalScoreYOffset + 100);
     }
 
-    ctx.textAlign = "left";
-    ctx.font = "12pt sans-serif";
-    ctx.fillStyle = "black";
-    ctx.fillText(game.gameHighScoreText, 200, 40);
-
+    // if the player beat the previous high score enlarge the text
+    // and make it red to provide extra motivation
+    ctx.textAlign = "center";
+    if (game.isNewHighScore) {
+        ctx.font = "14pt sans-serif";
+        ctx.fillStyle = "red";
+    } else {
+        ctx.font = "12pt sans-serif";
+        ctx.fillStyle = "black";
+    }
+    ctx.fillText(game.gameHighScoreText, 253, 40);
 
 };
 
-
+// Reset the player and game properties
+// Leave the high score
 Game.prototype.restart = function () {
-    console.log("Game Restart Requested")
     player.lives = 3;
     player.score = 0;
+    game.isNewHighScore = false;
     game.gameOver = false;
 
-    for (let i = 0; i < numberOfEnemies; i++) {
-        allEnemies[i].sprite = enemyVariants[Math.floor(Math.random() * 4)];
-
-    }
-
 }
-
 
 /*
     **
     **  Create game, enemies, player and setup key Listener
     **
  */
-// Create Game and set defaults
+// Create Game
 const game = new Game();
 
-// Place all enemy objects in an array called allEnemies
-const numberOfEnemies = 3;
+//Create bonusItem
+const bonusItem = new BonusItem();
 
-const enemyVariants = [
-    'images/enemy-bug.png',
-    'images/enemy-bug-2.png',
-    'images/enemy-bug-3.png',
-    'images/enemy-bug-4.png'];
-
+// Create the enemy array
 const allEnemies = [];
+// Set the number of enemies to generate
+const numberOfEnemies = 3;
+// Populate the enemy array
 for (let i = 0; i < numberOfEnemies; i++) {
     allEnemies.push(new Enemy());
 
@@ -259,12 +340,27 @@ function checkCollisions() {
         if (player.x < enemy.x + enemy.width && player.x + player.width > enemy.x &&
             player.y < enemy.y + enemy.height && player.y + player.height > enemy.y) {
             player.lives -= 1;
-            player.resetPlayer();
+            player.resetPlayerLocation();
         }
 
         if (player.lives <= 0) {
             game.gameOver = true;
         }
+    }
+
+    if (player.x < bonusItem.x + bonusItem.width && player.x + player.width > bonusItem.x &&
+        player.y < bonusItem.y + bonusItem.height && player.y + player.height > bonusItem.y) {
+
+
+        if (bonusItem.sprite.includes("Heart")) {
+            player.lives += 1;
+
+        } else {
+            player.score += 200;
+        }
+
+        bonusItem.hide();
+
     }
 }
 
