@@ -17,9 +17,26 @@ Use the arrow keys (&#8679; &#8681; &#8678; &#8680;) to navigate your player fro
 
 My best score in testing is 5700. Can quickly can you beat it?! Good luck!  
 
-#### &#9758; [Start the Game](https://brianbochicchio.github.io/udacity-classic-arcade/) 
+
+## Ready to play?
+
+Great! There are 3 ways to play the game.  
 
 
+#### Option 1:
+
+[Click here to play the game on-line ](https://brianbochicchio.github.io/udacity-classic-arcade/)  
+
+#### Option 2:
+
+- Download the game as a [zip file](https://github.com/brianbochicchio/udacity-classic-arcade/archive/master.zip).  
+- Extract the zip file
+- Double-click or Open index.html to start the game
+ 
+ #### Option 3: 
+ 
+ - Clone the repo with git: https://github.com/brianbochicchio/udacity-classic-arcade.git or   
+ - Double-click or Open index.html in the local repo to start the game
 
 
 ## Instructions
