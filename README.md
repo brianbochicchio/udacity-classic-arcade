@@ -13,6 +13,8 @@ Udacity Student Project
 
 Use the arrow keys (&#8679; &#8681; &#8678; &#8680;) to navigate your player from the grass to the water. Each time the player reaches the water their  score increases by 100 points. This also triggers a random bonus item to appear.  The heart grants an extra life. The green gem grants a 200 point bonus. The game also tracks the high score until the game browser is refreshed or closed. 
 
+[Watch a game play video](https://cl.ly/e544934185d7)
+
 My best score in testing is 5700. Can quickly can you beat it?! Good luck!  
 
 #### &#9758; [Start the Game](https://brianbochicchio.github.io/udacity-classic-arcade/) 
