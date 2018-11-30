@@ -35,7 +35,7 @@ Great! There are 3 ways to play the game.
  
  #### Option 3: 
  
- - Clone the repo with git: https://github.com/brianbochicchio/udacity-classic-arcade.git or   
+ - Clone the repo with git: https://github.com/brianbochicchio/udacity-classic-arcade.git
  - Double-click or Open index.html in the local repo to start the game
 
 

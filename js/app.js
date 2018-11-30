@@ -180,7 +180,6 @@ BonusItem.prototype.show = function () {
     this.y = Math.floor(Math.random() * 300) + 20;
     this.speed = Math.floor(Math.random() * 100) + 50;
     this.sprite = bonusItemVariants[Math.floor(Math.random() * 2)];
-    console.log("CURRENT Y: " + this.y + "Drift: " + this.drift);
     if (this.y >= 50 && this.y <= 200) {
         this.drift = .3;
     } else {
@@ -337,8 +336,8 @@ function checkCollisions() {
     // by Steven Lambert January 13, 2013
 
     for (const enemy of allEnemies) {
-        if (player.x < enemy.x + enemy.width && player.x + player.width > enemy.x &&
-            player.y < enemy.y + enemy.height && player.y + player.height > enemy.y) {
+        if ((player.x + 40) < enemy.x + enemy.width && player.x + player.width > enemy.x &&
+            (player.y + 72) < enemy.y + enemy.height && (player.y - 17) + player.height > enemy.y) {
             player.lives -= 1;
             player.resetPlayerLocation();
         }
@@ -350,8 +349,6 @@ function checkCollisions() {
 
     if (player.x < bonusItem.x + bonusItem.width && player.x + player.width > bonusItem.x &&
         player.y < bonusItem.y + bonusItem.height && player.y + player.height > bonusItem.y) {
-
-
         if (bonusItem.sprite.includes("Heart")) {
             player.lives += 1;
 
